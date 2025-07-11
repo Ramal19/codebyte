@@ -87,11 +87,61 @@ header > nav > ul > li > button {
     color: #fff;
 }
 
-section {
+
+
+/* Slayder */
+
+.slide {
 
     width: 100%;
     height: 100vh;
+    padding: 50px 200px;
     background-color: #9963fb;
+}
+
+.slide > .slide-box {
+
+    width: 100%;
+    height: 500px;
+    background-color: #ffffff9b;
+}
+
+.slide > .slide-box > .slide-first {
+
+    width: 100%;
+    height: 100%;
+    background-image: url("../../images/slide-first.jpg");
+    background-size: cover;
+    display: flex;
+    padding-top: 100px;
+    padding-left: 100px;
+}
+
+.slide > .slide-box > .slide-first > .slide-first-text {
+
+    width: 440px;
+    height: 120px;
+    padding: 30px 20px;
+    background-color: #fff;
+}
+
+.slide > .slide-box > .slide-second {
+
+    width: 100%;
+    height: 100%;
+    background-image: url("../../images/slide-second.jpg");
+    background-size: cover;
+    display: flex;
+    padding-top: 100px;
+    padding-left: 100px;
+}
+
+.slide > .slide-box > .slide-second > .slide-second-text {
+
+    width: 440px;
+    height: 150px;
+    padding: 30px 20px;
+    background-color: #fff;
 }
 
 /* Böyük ekranlar */
