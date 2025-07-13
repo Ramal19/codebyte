@@ -19,17 +19,15 @@ let slideSecond = slideBox.innerHTML = `
             </div>
         </div>
 `;
-let slideThird = slideBox.innerHTML = `<h1>sssssaaaa</h1>`;
-let slideFourth = slideBox.innerHTML = `<h1>cvcvvcvv</h1>`;
 
-let arr = [slideFirst, slideSecond, slideThird, slideFourth];
+let arr = [slideFirst, slideSecond];
 let index = 0;
 slideBox.innerHTML = arr[index];
 
-setInterval(() => {
-    index++;
-    if (index >= arr.length) {
-        index = 0;
-    }
-    slideBox.innerHTML = arr[index];
-}, 3000);
+// setInterval(() => {
+//     index++;
+//     if (index >= arr.length) {
+//         index = 0;
+//     }
+//     slideBox.innerHTML = arr[index];
+// }, 3000);
