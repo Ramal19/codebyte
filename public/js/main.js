@@ -1,3 +1,5 @@
+
+
 let slideBox = document.querySelector('.slide-box');
 
 let slideFirst = slideBox.innerHTML =   `
@@ -24,10 +26,26 @@ let arr = [slideFirst, slideSecond];
 let index = 0;
 slideBox.innerHTML = arr[index];
 
-// setInterval(() => {
-//     index++;
-//     if (index >= arr.length) {
-//         index = 0;
-//     }
-//     slideBox.innerHTML = arr[index];
-// }, 3000);
+setInterval(() => {
+    index++;
+    if (index >= arr.length) {
+        index = 0;
+    }
+    slideBox.innerHTML = arr[index];
+}, 3000);
+
+let btns = document.querySelectorAll(".courses-lists > button");
+
+btns.forEach((btn => {
+    btn.addEventListener("click", ()=>{
+        btns.forEach((b => b.style.borderBottom = "none"));
+        btn.style.borderBottom = "1px solid #9963fb";
+    })
+}))
+
+let coursesItem = document.querySelector(".courses-item-text");
+let coursesItemArr = ["ChatGPT", "Python", "JavaScript", "HTML & CSS", "React", "Node.js"];
+
+let indexItem = 0;
+
+coursesItem.innerText = coursesItemArr[indexItem];
