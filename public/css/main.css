@@ -66,6 +66,7 @@ header > nav > ul > li {
 
     display: flex;
     align-items: center;
+    gap: 10px;
 }
 
 header > nav > ul > li > a {
@@ -85,9 +86,26 @@ header > nav > ul > li > button {
     font-size: 16px;
     font-weight: 600;
     color: #fff;
+    cursor: pointer;
 }
 
+header > nav > ul > li > button:hover {
 
+    background-color: #7a4cd2;
+}
+
+header > nav > ul > li > button:nth-child(2) {
+    
+    background-color: #fff;
+    border: 2px solid #9963fb;
+    color: #9963fb;
+}
+
+header > nav > ul > li > button:nth-child(2):hover {
+
+    background-color: #9963fb;
+    color: #fff;
+}
 
 /* Slayder */
 
@@ -150,6 +168,7 @@ header > nav > ul > li > button {
     width: 100%;
     padding: 50px 200px;
     background-color: #f4f4f4;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
 .courses > .courses-lists {
@@ -158,6 +177,7 @@ header > nav > ul > li > button {
     display: flex;
     flex-wrap: wrap;
     gap: 20px;
+    border-bottom: 1px solid #ccc;
 }
 
 .courses > .courses-lists > button {
@@ -174,7 +194,67 @@ header > nav > ul > li > button {
     border-bottom: 1px solid #9963fb;
 }
 
-/* Böyük ekranlar */
+.courses > .courses-item {
+    /* Sənin kodların */
+    display: flex;
+    flex-wrap: nowrap; /* wrap olmasın ki, scroll olsun */
+    gap: 20px;
+    padding: 20px;
+    width: 100%;
+    background-color: #fff;
+    overflow-x: auto;
+
+    /* Scrollbar gizlət */
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* IE ve Edge */
+}
+
+.courses > .courses-item::-webkit-scrollbar {
+    display: none; /* Chrome, Safari */
+}
+
+
+.courses > .courses-item > div {
+
+    width: 400px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #9963fb;
+    padding: 20px;
+    border-radius: 9999px;
+    color: #fff;
+}
+
+.courses > .courses-cards {
+
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.courses > .courses-cards > div {
+
+    display: flex;
+    flex-direction: column;
+    align-items: left;
+    gap: 10px;
+    width: 300px;
+    height: 400px;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+}
+
+.courses > .courses-cards > div > span {
+
+    color: yellowgreen;
+}
+/* 
+/* Böyük ekranlar 
 @media (min-width: 1200px) {
   header {
 
@@ -193,7 +273,7 @@ header > nav > ul > li > button {
     }
 } 
 
-/* Normal desktop */
+/* Normal desktop 
 @media (max-width: 1199px) and (min-width: 992px) {
     header {
         display: none;
@@ -203,9 +283,9 @@ header > nav > ul > li > button {
 /* Tablet
 @media (max-width: 991px) and (min-width: 768px) {
   
-} */
+} 
 
- /* Mobil böyük */
+ /* Mobil böyük 
  @media (max-width: 767px) and (min-width: 480px) {
   
     header {
@@ -214,7 +294,7 @@ header > nav > ul > li > button {
     }
 } 
 
-/* Mobil kiçik */
+/* Mobil kiçik 
 @media (max-width: 479px) {
     header {
 
@@ -315,4 +395,144 @@ header > nav > ul > li > button {
         bottom: -150px;
         left: 0;
     }
-} 
+}  */
+
+/* ============================= */
+/* RESPONSIVE UNIVERSAL SETTINGS */
+/* ============================= */
+
+/* Tablet və aşağı */
+@media (max-width: 991px) {
+
+  header > nav {
+    padding: 10px 50px;
+  }
+
+  header > nav > ul {
+    display: none;
+  }
+
+  header > nav > .menu-toggle {
+    display: block;
+    cursor: pointer;
+    font-size: 24px;
+  }
+
+  header > nav > .search-toggle {
+    display: block;
+    cursor: pointer;
+    font-size: 24px;
+  }
+
+  /* Mobil menyu açılma hissəsi */
+  header.open > nav > ul {
+    display: flex;
+    flex-direction: column;
+    background: #fff;
+    position: absolute;
+    top: 60px;
+    right: 0;
+    width: 100%;
+    padding: 20px;
+    gap: 15px;
+    box-shadow: rgba(0,0,0,0.2) 0 4px 8px;
+    z-index: 10;
+  }
+
+  header > nav > ul > li > button {
+    width: 100%;
+  }
+
+  .slide {
+    padding: 20px;
+  }
+
+  .slide > .slide-box {
+    height: auto;
+    min-height: 300px;
+  }
+
+  .courses {
+    padding: 30px 20px;
+  }
+
+  .courses > .courses-lists {
+    gap: 10px;
+  }
+
+  .courses > .courses-lists > button {
+    font-size: 16px;
+    padding: 8px;
+  }
+
+  .courses > .courses-item {
+    gap: 10px;
+  }
+
+  .courses > .courses-item > div {
+    width: 250px;
+    font-size: 14px;
+    padding: 10px;
+  }
+
+  .courses > .courses-cards {
+    justify-content: center;
+  }
+
+  .courses > .courses-cards > div {
+    width: 100%;
+    max-width: 300px;
+  }
+}
+
+/* Mobil */
+@media (max-width: 767px) {
+
+  header > nav {
+    padding: 10px 15px;
+  }
+
+  header > nav > .logo-navbar > img {
+    width: 40px;
+    margin-bottom: 0;
+  }
+
+  header > nav > .logo-navbar > h1 {
+    font-size: 20px;
+  }
+
+  .slide > .slide-box > .slide-first > .slide-first-text,
+  .slide > .slide-box > .slide-second > .slide-second-text {
+    padding: 20px;
+    font-size: 14px;
+  }
+
+  .courses > .courses-item > div {
+    width: 200px;
+    font-size: 13px;
+    padding: 8px;
+  }
+
+  .courses > .courses-cards {
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .courses > .courses-cards > div {
+    width: 100%;
+    max-width: 100%;
+  }
+}
+
+/* Mobil kiçik */
+@media (max-width: 479px) {
+  header > nav > .logo-navbar > h1 {
+    font-size: 18px;
+  }
+
+  .courses > .courses-item > div {
+    width: 150px;
+    font-size: 12px;
+    padding: 5px;
+  }
+}

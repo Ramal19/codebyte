@@ -49,3 +49,14 @@ let coursesItemArr = ["ChatGPT", "Python", "JavaScript", "HTML & CSS", "React", 
 let indexItem = 0;
 
 coursesItem.innerText = coursesItemArr[indexItem];
+
+document.addEventListener("DOMContentLoaded", () => {
+  const menuToggle = document.querySelector(".menu-toggle");
+  const header = document.querySelector("header");
+
+  if(menuToggle) {
+    menuToggle.addEventListener("click", () => {
+      header.classList.toggle("open");
+    });
+  }
+});
