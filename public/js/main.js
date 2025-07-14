@@ -60,3 +60,22 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 });
+
+let loginBtn = document.getElementById("login-btn");
+let registerBtn = document.getElementById("register-btn");
+
+loginBtn.addEventListener("click", () => {
+    window.location.href = "./public/login/register.html";
+});
+
+registerBtn.addEventListener("click", () => {
+    window.location.href = "./public/login/register.html";
+});
+
+let videoRoll = document.querySelectorAll(".courses > div");
+
+videoRoll.forEach((video) => {
+    video.addEventListener("click", () => {
+        window.location.href = "./public/videos/video.html";
+    });
+});
