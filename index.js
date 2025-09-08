@@ -1,0 +1,99 @@
+let searchInp = document.getElementById("search-inp");
+let searchIcon = document.getElementById("search-icon");
+
+searchInp.addEventListener("input", () => {
+
+    if (searchInp.value != "") {
+
+        searchIcon.style.display = "inline-block";
+    } else {
+
+        searchIcon.style.display = "none";
+    }
+})
+
+let slideBox = document.querySelector(".slide-box");
+
+let slideFirst = `
+    <img id="slide-img" src="./website-photo/slide-photo.png" alt="Error 404">
+    <div class="img-text">
+        <h1>Proqramlaşdırma öyrənmək heç vaxt bu qədər asan olmayıb!</h1>
+        <p>CodeByte ilə proqramlaşdırma biliklərinizi artırın və karyeranızı yeni zirvələrə daşıyın. İndi başlayın!</p>
+        <button class="begin-button">Başla</button>
+    </div>`;
+
+let slideSecond = `
+    <img id="slide-img" src="./website-photo/slide-photo-second.png" alt="Error 404">
+    <div class="img-text-second">
+        <h1>Texnologiya ilə gələcəyini qur!</h1>
+        <p>AI və proqramlaşdırma bacarıqları ilə karyerana yeni nəfəs ver. CodeByte ilə gələcəyə addım at!</p>
+        <button class="begin-button">Başla</button>
+    </div>`;
+
+let arr = [slideFirst, slideSecond];
+let index = 0;
+
+slideBox.innerHTML = arr[index];
+
+setInterval(() => {
+    index++;
+    if (index > arr.length - 1) {
+        index = 0;
+    }
+    slideBox.innerHTML = arr[index];
+}, 5000);
+
+let books = document.getElementById("booksHtmlSwitch");
+
+books.addEventListener("click", () => {
+    window.location.href = "books.html";
+})
+
+let normalBtn = document.querySelector(".normal");
+let specialBtn = document.querySelector(".special");
+
+let offersForNormal = document.querySelector(".offers-for-normal");
+let offersForSpecial = document.querySelector(".offers-for-special");
+
+
+normalBtn.addEventListener("click", () => {
+    normalBtn.style.backgroundColor = "#2da0fd";
+    normalBtn.style.color = "#fff";
+
+    specialBtn.style.backgroundColor = "transparent";
+    specialBtn.style.color = "#000";
+
+    offersForNormal.style.display = "flex";
+    offersForSpecial.style.display = "none";
+});
+
+specialBtn.addEventListener("click", () => {
+    specialBtn.style.backgroundColor = "#2da0fd";
+    specialBtn.style.color = "#fff";
+    specialBtn.style.borderRadius = "9999px";
+
+    normalBtn.style.backgroundColor = "transparent";
+    normalBtn.style.color = "#000";
+
+    offersForNormal.style.display = "none";
+    offersForSpecial.style.display = "flex";
+});
+
+// ANSWER BOX JS
+let questionBox = document.querySelectorAll(".faq-card > h3");
+let answerBox = document.querySelectorAll(".faq-card > p");
+
+questionBox.forEach((element, index) => {
+    element.addEventListener("click", () => {
+        if (answerBox[index].style.display === "none") {
+            answerBox[index].style.display = "block";
+        } else {
+            answerBox[index].style.display = "none";
+        }
+    });
+});
+
+answerBox.forEach((element) => {
+    element.style.display = "none";
+});
+
