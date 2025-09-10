@@ -1,12 +1,9 @@
 * {
 
-    padding: 0px;
-    margin: 0px;
+    padding: 0;
+    margin: 0;
     box-sizing: border-box;
 }
-
-/* NAVBAR */
-
 
 header {
 
@@ -105,6 +102,25 @@ li > a:hover {
     font-weight: 500;
 }
 
+.navbar > .add {
+
+  width: 70px;
+}
+
+.add > .wishlist-add {
+
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.add > .wishlist-add > .bi-cart, .bi-heart {
+
+  font-size: 24px;
+}
+
+
+
 .registration-part > 
 .login-button {
   position: relative;
@@ -126,7 +142,7 @@ li > a:hover {
 
 .login-button:hover {
   background: rgb(61, 106, 255);
-  box-shadow: 0 0 30px 5px rgba(0, 142, 236, 0.815);
+  box-shadow: 0 0 10px 2px rgba(0, 142, 236, 0.815);
   -webkit-transition: all 0.2s ease-out;
   -moz-transition: all 0.2s ease-out;
   transition: all 0.2s ease-out;
@@ -261,253 +277,15 @@ li > a:hover {
   transition: box-shadow 0.2s ease-in;
 }
 
-/* CONTAINER */
-
-.contact-dom {
+.main {
 
     width: 100%;
-    padding: calc(100vh - 847px) 200px;
-    background-color: #2d9ffd31;
     display: flex;
     flex-direction: column;
     align-items: center;
-    font-family: Arial, Helvetica, sans-serif;
+    padding: 100px 200px;
     gap: 20px;
-    padding: 100px 0;
-}
-
-.contact-dom > h1 {
-
-    font-size: 36px;
-    font-weight: 700;
-}
-
-.contact-dom > p {
-
-    width: 700px;
-    font-size: 18px;
-    text-align: center;
-    font-weight: 400;
-}
-
-.contact-dom > .contact-form {
-
-    width: 100%;
-    display: flex;
-    gap: 50px;
-}
-
-.contact-form > .form {
-
-    width: calc(100% - 50%);
-    padding: 20px 50px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 25px;
-}
-
-.contact-form > .form > .name {
-
-    width: calc(100% - 120px);
-    display: flex;
-    justify-content: space-between;
-}
-
-.contact-form > .form > .name > label {
-
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
-    font-size: 14px;
-    font-weight: 400;
-}
-
-.contact-form > .form > .name > label > input {
-
-    width: 250px;
-    outline: 0;
-    border: 1px solid #ccc;
-    border-radius: 7px;
-    padding: 5px;
-    font-size: 18px;
-}
-
-.contact-form > .form > label {
-
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
-    font-size: 14px;
-    font-weight: 400;
-    width: calc(100% - 120px);
-}
-
-.contact-form > .form > label > input {
-
-    outline: 0;
-    border: 1px solid #ccc;
-    border-radius: 7px;
-    padding: 5px;
-    font-size: 18px;
-}
-
-.contact-form > .form > .phone-number {
-
-    width: calc(100% - 120px);
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
-}
-
-.contact-form > .form > .phone-number > label {
-
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
-    font-size: 14px;
-    font-weight: 400;
-}
-
-.contact-form > .form > .phone-number > .label {
-
-    width: 100%;
-    display: flex;
-    border: 1px solid #ccc;
-    border-radius: 7px;
-}
-
-.contact-form > .form > .phone-number > .label > select {
-
-    width: calc(100% - 85%);
-    border: none;
-    border-radius: 7px 0px 0px 7px;
-    outline: 0;
-    padding: 5px;
-    font-size: calc(18px - 5px);
-}
-
-.contact-form > .form > .phone-number > .label > input {
-
-    outline: 0;
-    border: none;
-    border-radius: 0px 7px 7px 0px;
-    padding: 5px;
-    font-size: 18px;
-    width: calc(100% - 15%);
-}
-
-.contact-form > .form > #message-label {
-
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
-    font-size: 14px;
-    font-weight: 400;
-}
-#message-label textarea {
-
-    resize: none;
-    width: 100%;
-    height: 200px;
-    border-radius: 7px;
-    border: 1px solid #ccc;
-    outline: none;
-    font-size: 18px;
-    font-family: Arial, Helvetica, sans-serif;
-    padding: 5px;
-}
-
-.contact-form > .form > #sendBtn {
-
-    width: calc(100% - 120px);
-    padding: 10px 0px;
-    border: none;
-    border-radius: 7px;
-    background-color: black;
-    color: #fff;
-    font-size: 18px;
-}
-
-/* CODEBYTEINFO */
-
-.contact-form > .codebyte-info {
-
-    width: calc(100% - 50%);
-    padding: 20px 50px;
-    display: flex;
-    flex-direction: column;
-    gap: 18px;
-}
-
-.contact-form > .codebyte-info > .social-media {
-
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-}
-
-.contact-form > .codebyte-info > .social-media > p {
-
-    font-size: 18px;
-    font-weight: 400;
-}
-
-.codebyte-info > .social-media > a {
-
-    font-size: 14px;
-    text-decoration: none;
-    color: #000;
-}
-
-.codebyte-info > .social-media > a:hover {
-
-    color: #2da0fd;
-}
-
-.codebyte-info > .social-media > a > .bi-linkedin {
-
-    color: #0178B2;
-}
-
-.codebyte-info > .social-media > a > .bi-instagram {
-
-    color: #F47A30;
-}
-
-.contact-form > .codebyte-info > .social-media > a > .bi-instagram, .bi-linkedin {
-
-    font-size: 18px;
-}
-
-.contact-form > .codebyte-info > .call-phone {
-
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-}
-
-.contact-form > .codebyte-info > .call-phone > p {
-
-    font-size: 18px;
-    font-weight: 400;
-}
-
-.contact-form > .codebyte-info > .call-phone > span {
-
-    font-size: 14px;
-}
-
-.contact-form > .codebyte-info > .call-phone > span:hover {
-
-    color: #0178B2;
-    cursor: pointer;
-}
-
-.contact-form > .codebyte-info > .call-phone > span > .bi-telephone-fill {
-
-    color: #000;
-    font-size: 18px ;
+    background-color: #2d9ffd3d;
 }
 
 .footer {

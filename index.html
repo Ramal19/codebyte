@@ -18,11 +18,6 @@
 
             <ul>
                 <li>
-                    <a href="./contact.html">
-                        Əlaqə
-                    </a>
-                </li>
-                <li>
                     <a href="./index.html">
                         Ana Səhifə
                     </a>
@@ -33,7 +28,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="">
+                    <a href="./telimciler.html">
                         Təlimçilər
                     </a>
                 </li>
@@ -42,7 +37,11 @@
                         Yol xəritəsi
                     </a>
                 </li>
-                
+                <li>
+                    <a href="./contact.html">
+                        Əlaqə
+                    </a>
+                </li>
             </ul>
 
             <div class="search-bar">
@@ -50,6 +49,13 @@
                     <i class="bi bi-search"></i>
                 </button>
                 <input id="search-inp" type="text" placeholder="Axtar...">
+            </div>
+
+            <div class="add">
+                <span class="wishlist-add">
+                    <i class="bi bi-heart"></i>
+                    <i class="bi bi-cart"></i>
+                </span>
             </div>
 
 
@@ -65,20 +71,69 @@
     </header>
 
     <section class="main-section">
-        <!-- <div class="main-text">
-            <h1>Proqramlaşdırma öyrənmək heç vaxt bu qədər asan olmayıb!</h1>
-            <p>CodeByte ilə proqramlaşdırma biliklərinizi artırın və karyeranızı yeni zirvələrə daşıyın. İndi başlayın!
-            </p>
-            <button class="get-started-button">Başla</button>
-        </div>
-        <div class="main-image">
 
-        </div> -->
 
         <div class="slide-box">
 
         </div>
 
+    </section>
+
+    <section class="courses">
+        <h2>
+            Kurslarımız
+        </h2>
+
+        <div class="course-box">
+            <div class="course-list">
+                <button>JavaScript</button>
+                <button>Canva</button>
+                <button>C++</button>
+                <button>React JS</button>
+                <button>Python</button>
+            </div>
+            <div class="course-card-list">
+                <div class="course-card">
+                    <div class="img-box">
+                        <span id="wishlist">
+                            <i class="bi bi-heart-fill"></i>
+                        </span>
+                        <div class="fade">
+                            <span>
+                                3 saatlıq
+                            </span>
+                        </div>
+                        <img src="./course-img/course-img-ramal.png" alt="">
+                    </div>
+                    <div class="card-text">
+                        <h3 id="course-name">
+                            JavaScript
+                        </h3>
+                        <p id="teacher">
+                            Ramal Asgarov
+                        </p>
+                        <span class="rating-price">
+                            <div class="rating">
+                                <i style="color: #1A9426;" class="bi bi-star-fill"></i>
+                                <i style="color: #1A9426;" class="bi bi-star-fill"></i>
+                                <i style="color: #1A9426;" class="bi bi-star-fill"></i>
+                                <i style="color: #1A9426;" class="bi bi-star-fill"></i>
+                                <i style="color: #D6D6D6;" class="bi bi-star-fill"></i>
+                            </div>
+
+                            <div class="price">
+                                <span>
+                                    200₼
+                                </span>
+                                <span>
+                                    120₼
+                                </span>
+                            </div>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
     </section>
 
     <section class="books">
@@ -362,7 +417,97 @@
         </div>
     </section>
 
-    <script src="./index.js"></script>
+    <footer class="footer">
+        <div class="footer-top">
+            <p>Ən yaxşı şirkətlər <a href="#">Biznes Platformamızı</a> seçərək tələb olunan bacarıqları inkişaf
+                etdirirlər.</p>
+            <div class="footer-logos">
+                <img src="nasdaq-logo.png" alt="Nasdaq">
+                <img src="volkswagen-logo.png" alt="VW">
+                <img src="netapp-logo.png" alt="NetApp">
+                <img src="eventbrite-logo.png" alt="Eventbrite">
+            </div>
+        </div>
+
+        <div class="footer-links">
+            <div>
+                <h4>Tələb Olunan Peşələr</h4>
+                <a href="#">Məlumat Alimi</a>
+                <a href="#">Full Stack Veb Proqramçı</a>
+                <a href="#">Bulud Mühəndisi</a>
+                <a href="#">Layihə Meneceri</a>
+                <a href="#">Oyun Yaradıcı</a>
+                <a href="#">Bütün Peşələr</a>
+            </div>
+            <div>
+                <h4>Veb İnkişaf</h4>
+                <a href="#">Veb İnkişaf</a>
+                <a href="#">JavaScript</a>
+                <a href="#">React JS</a>
+                <a href="#">Angular</a>
+                <a href="#">Java</a>
+            </div>
+            <div>
+                <h4>İT Sertifikatlar</h4>
+                <a href="#">Amazon AWS</a>
+                <a href="#">Azure Fundamentals</a>
+                <a href="#">Həll Memarı</a>
+                <a href="#">Kubernetes</a>
+            </div>
+            <div>
+                <h4>Məlumat Elmi</h4>
+                <a href="#">Python</a>
+                <a href="#">Maşın Öyrənməsi</a>
+                <a href="#">Dərin Öyrənmə</a>
+                <a href="#">Süni İntellekt</a>
+            </div>
+            <div>
+                <h4>Biznes Analitika</h4>
+                <a href="#">Excel</a>
+                <a href="#">SQL</a>
+                <a href="#">Power BI</a>
+                <a href="#">Biznes Analizi</a>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <div class="footer-col">
+                <h4>Haqqımızda</h4>
+                <a href="#">Şirkət haqqında</a>
+                <a href="#">Karyera</a>
+                <a href="#">Bizimlə əlaqə</a>
+                <a href="#">Bloq</a>
+                <a href="#">Investorlar</a>
+            </div>
+            <div class="footer-col">
+                <h4>Kəşf et</h4>
+                <a href="#">Mobil tətbiq</a>
+                <a href="#">Müəllim ol</a>
+                <a href="#">Planlar və Qiymətlər</a>
+                <a href="#">Tərəfdaşlıq</a>
+                <a href="#">Dəstək</a>
+            </div>
+            <div class="footer-col">
+                <h4>Biznes üçün</h4>
+                <a href="#">Biznes Həlləri</a>
+            </div>
+            <div class="footer-col">
+                <h4>Hüquqi</h4>
+                <a href="#">Əlçatanlıq</a>
+                <a href="#">Məxfilik siyasəti</a>
+                <a href="#">Sayt xəritəsi</a>
+                <a href="#">Şərtlər</a>
+            </div>
+        </div>
+
+        <div class="footer-copy">
+            <p>© 2025 Platforma, MMC.</p>
+            <div class="language">🌐 Azərbaycan dili</div>
+        </div>
+    </footer>
+
+
+    <script src="./script/index.js"></script>
 </body>
 
 </html>

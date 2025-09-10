@@ -97,3 +97,56 @@ answerBox.forEach((element) => {
     element.style.display = "none";
 });
 
+let heartIcon = document.querySelector(".bi-heart");
+let cartIcon = document.querySelector(".bi-cart");
+
+heartIcon.onclick = ()=>{
+
+    window.location.href = "./wishlist.html"
+}
+
+heartIcon.addEventListener("mouseover", () => {
+
+    heartIcon.classList.replace("bi-heart", "bi-heart-fill");
+    heartIcon.style.cssText = "color: red; font-size: 24px;";
+})
+
+heartIcon.addEventListener("mouseout", () => {
+
+    heartIcon.classList.replace("bi-heart-fill", "bi-heart");
+    heartIcon.style.cssText = "color: #000; font-size: 24px;"
+})
+
+cartIcon.addEventListener("mouseover", ()=>{
+
+    cartIcon.classList.replace("bi-cart", "bi-cart-fill");
+    cartIcon.style.cssText = "font-size: 24px"
+})
+
+cartIcon.addEventListener("mouseout", ()=>{
+
+    cartIcon.classList.replace("bi-cart-fill", "bi-cart");
+})
+
+
+document.querySelectorAll("#wishlist-btn").forEach(btn => {
+    btn.addEventListener("click", () => {
+      let card = btn.closest(".course-card");
+
+      let course = {
+        id: card.dataset.id,
+        title: card.dataset.title,
+        price: card.dataset.price
+      };
+
+      let wishlist = JSON.parse(localStorage.getItem("wishlist")) || [];
+
+      if (!wishlist.some(item => item.id === course.id)) {
+        wishlist.push(course);
+        localStorage.setItem("wishlist", JSON.stringify(wishlist));
+        alert(`${course.title} sevimlilərə əlavə olundu!`);
+      } else {
+        alert(`${course.title} artıq sevimlilərdədir!`);
+      }
+    });
+  });

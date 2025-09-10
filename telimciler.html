@@ -1,0 +1,749 @@
+<!DOCTYPE html>
+<html lang="az">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CodeByte</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Poppins', sans-serif;
+            background: #f0f4f8;
+            color: #333;
+        }
+
+
+        header {
+
+            display: flex;
+            margin-bottom: 4.2%;
+
+        }
+
+        header>.navbar {
+
+            width: 100%;
+            height: 80px;
+            display: flex;
+            background-color: #fff;
+            padding: 20px 0px;
+            align-items: center;
+            justify-content: space-around;
+            box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+            position: fixed;
+            z-index: 1;
+        }
+
+        .navbar>.logo {
+
+            width: 200px;
+        }
+
+        .logo>img {
+
+            width: 150px;
+        }
+
+        .navbar>ul {
+
+            display: flex;
+            list-style: none;
+            gap: 30px;
+            font-family: Arial, Helvetica, sans-serif
+        }
+
+        ul>li {
+            font-size: 16px;
+            font-weight: 500;
+        }
+
+        li>a {
+            text-decoration: none;
+            color: #333;
+            transition: color 0.2s;
+            font-weight: bold;
+        }
+
+        li>a:hover {
+            color: #2da0fd;
+        }
+
+        .navbar>.search-bar {
+
+            width: 350px;
+            height: 38px;
+            display: flex;
+            gap: 10px;
+        }
+
+        .search-bar>.search-button {
+
+            display: none;
+            border: none;
+            background-color: transparent;
+            cursor: pointer;
+            padding: 0px 10px;
+            border-radius: 7px;
+            background-color: #2da0fd;
+        }
+
+        .search-bar>.search-button>.bi-search {
+
+            font-size: 20px;
+            color: #fff;
+        }
+
+        .search-bar>input {
+
+            width: 100%;
+            height: 100%;
+            border: 2px solid #ccc;
+            border-radius: 7px;
+            outline: none;
+            padding-left: 10px;
+            font-size: 16px;
+        }
+
+        .search-bar>input::placeholder {
+
+            color: #ccc;
+            font-weight: 500;
+        }
+
+        .navbar>.add {
+
+            width: 70px;
+        }
+
+        .add>.wishlist-add {
+
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .add>.wishlist-add>.bi-cart,
+        .bi-heart {
+
+            font-size: 24px;
+        }
+
+
+
+        .registration-part>.login-button {
+            position: relative;
+            padding: 10px 20px;
+            border-radius: 7px;
+            border: 1px solid #2da0fd;
+            font-size: 14px;
+            text-transform: uppercase;
+            font-weight: 600;
+            letter-spacing: 2px;
+            background: transparent;
+            color: #2da0fd;
+            overflow: hidden;
+            box-shadow: 0 0 0 0 transparent;
+            -webkit-transition: all 0.2s ease-in;
+            -moz-transition: all 0.2s ease-in;
+            transition: all 0.2s ease-in;
+        }
+
+        .login-button:hover {
+            background: rgb(61, 106, 255);
+            box-shadow: 0 0 10px 2px rgba(0, 142, 236, 0.815);
+            -webkit-transition: all 0.2s ease-out;
+            -moz-transition: all 0.2s ease-out;
+            transition: all 0.2s ease-out;
+            color: #fff;
+        }
+
+        .login-button:hover::before {
+            -webkit-animation: sh02 0.5s 0s linear;
+            -moz-animation: sh02 0.5s 0s linear;
+            animation: sh02 0.5s 0s linear;
+        }
+
+        .login-button::before {
+            content: '';
+            display: block;
+            width: 0px;
+            height: 86%;
+            position: absolute;
+            top: 7%;
+            left: 0%;
+            opacity: 0;
+            background: #fff;
+            box-shadow: 0 0 50px 30px #fff;
+            -webkit-transform: skewX(-20deg);
+            -moz-transform: skewX(-20deg);
+            -ms-transform: skewX(-20deg);
+            -o-transform: skewX(-20deg);
+            transform: skewX(-20deg);
+        }
+
+        @keyframes sh02 {
+            from {
+                opacity: 0;
+                left: 0%;
+            }
+
+            50% {
+                opacity: 1;
+            }
+
+            to {
+                opacity: 0;
+                left: 100%;
+            }
+        }
+
+        .login-button:active {
+            box-shadow: 0 0 0 0 transparent;
+            -webkit-transition: box-shadow 0.2s ease-in;
+            -moz-transition: box-shadow 0.2s ease-in;
+            transition: box-shadow 0.2s ease-in;
+        }
+
+        .navbar>.registration-part {
+
+            display: flex;
+            gap: 20px;
+        }
+
+        .registration-part>.register-button {
+            position: relative;
+            padding: 10px 20px;
+            border-radius: 7px;
+            border: 1px solid #2da0fd;
+            font-size: 14px;
+            text-transform: uppercase;
+            font-weight: 600;
+            letter-spacing: 2px;
+            background: #2da0fd;
+            color: #fff;
+            overflow: hidden;
+            box-shadow: 0 0 0 0 transparent;
+            -webkit-transition: all 0.2s ease-in;
+            -moz-transition: all 0.2s ease-in;
+            transition: all 0.2s ease-in;
+        }
+
+        .register-button:hover {
+            background: #fff;
+            box-shadow: 0 0 30px 5px rgba(0, 142, 236, 0.815);
+            -webkit-transition: all 0.2s ease-out;
+            -moz-transition: all 0.2s ease-out;
+            transition: all 0.2s ease-out;
+            color: #2da0fd;
+        }
+
+        .register-button:hover::before {
+            -webkit-animation: sh02 0.5s 0s linear;
+            -moz-animation: sh02 0.5s 0s linear;
+            animation: sh02 0.5s 0s linear;
+        }
+
+        .register-button::before {
+            content: '';
+            display: block;
+            width: 0px;
+            height: 86%;
+            position: absolute;
+            top: 7%;
+            left: 0%;
+            opacity: 0;
+            background: #fff;
+            box-shadow: 0 0 50px 30px #fff;
+            -webkit-transform: skewX(-20deg);
+            -moz-transform: skewX(-20deg);
+            -ms-transform: skewX(-20deg);
+            -o-transform: skewX(-20deg);
+            transform: skewX(-20deg);
+        }
+
+        @keyframes sh02 {
+            from {
+                opacity: 0;
+                left: 0%;
+            }
+
+            50% {
+                opacity: 1;
+            }
+
+            to {
+                opacity: 0;
+                left: 100%;
+            }
+        }
+
+        .register-button:active {
+            box-shadow: 0 0 0 0 transparent;
+            -webkit-transition: box-shadow 0.2s ease-in;
+            -moz-transition: box-shadow 0.2s ease-in;
+            transition: box-shadow 0.2s ease-in;
+        }
+
+
+        .header {
+            background-color: #2da0fd;
+            color: white;
+            text-align: center;
+            padding: 60px 20px;
+        }
+
+        .header h1 {
+            font-size: 3rem;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            font-size: 1.2rem;
+        }
+
+        .teachers-section {
+            max-width: 1200px;
+            margin: 50px auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            padding: 0 20px;
+        }
+
+        .teacher-card {
+            background: #fff;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+            transition: transform 0.4s, box-shadow 0.4s;
+            position: relative;
+        }
+
+        .teacher-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        .teacher-card img {
+            width: 100%;
+            height: 280px;
+            object-fit: cover;
+            border-bottom-left-radius: 20px;
+            border-bottom-right-radius: 20px;
+            clip-path: polygon(0 0, 100% 0, 100% 85%, 0% 100%);
+        }
+
+        .card-body {
+            padding: 20px;
+            text-align: center;
+        }
+
+        .card-body h3 {
+            margin-bottom: 5px;
+            font-weight: 600;
+        }
+
+        .card-body p {
+            font-size: 0.95rem;
+            color: #777;
+            margin-bottom: 15px;
+        }
+
+        .social-icons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        .social-icons a {
+            color: #667eea;
+            font-size: 1.2rem;
+            transition: color 0.3s;
+        }
+
+        .social-icons a:hover {
+            color: #764ba2;
+        }
+
+        .footer {
+            background-color: #1c1d1f;
+            color: #ccc;
+            padding: 40px 60px;
+            font-family: Arial, sans-serif;
+        }
+
+        .footer a {
+            display: block;
+            color: #ccc;
+            text-decoration: none;
+            margin: 4px 0;
+            font-size: 14px;
+        }
+
+        .footer a:hover {
+            color: #fff;
+        }
+
+        .footer-top {
+            border-bottom: 1px solid #333;
+            padding-bottom: 20px;
+            margin-bottom: 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .footer-top p {
+            font-size: 14px;
+        }
+
+        .footer-top .footer-logos img {
+            height: 25px;
+            margin-left: 15px;
+        }
+
+        .footer-links {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        .footer-links h4 {
+            color: #fff;
+            margin-bottom: 10px;
+            font-size: 15px;
+        }
+
+        .footer-bottom {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        .footer-bottom h4 {
+            color: #fff;
+            margin-bottom: 10px;
+            font-size: 15px;
+        }
+
+        .footer-copy {
+            border-top: 1px solid #333;
+            padding-top: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 13px;
+        }
+
+        .footer-copy .language {
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <nav class="navbar">
+            <div class="logo">
+                <img src="./website-photo/codebyteLogoMa.png" alt="LOGO">
+            </div>
+
+            <ul>
+                <li>
+                    <a href="./index.html">
+                        Ana Səhifə
+                    </a>
+                </li>
+                <li>
+                    <a href="">
+                        Kurslar
+                    </a>
+                </li>
+                <li>
+                    <a href="./telimciler.html">
+                        Təlimçilər
+                    </a>
+                </li>
+                <li>
+                    <a href="">
+                        Yol xəritəsi
+                    </a>
+                </li>
+                <li>
+                    <a href="./contact.html">
+                        Əlaqə
+                    </a>
+                </li>
+            </ul>
+
+            <div class="search-bar">
+                <button id="search-icon" class="search-button">
+                    <i class="bi bi-search"></i>
+                </button>
+                <input id="search-inp" type="text" placeholder="Axtar...">
+            </div>
+
+            <div class="add">
+                <span class="wishlist-add">
+                    <i class="bi bi-heart"></i>
+                    <i class="bi bi-cart"></i>
+                </span>
+            </div>
+
+
+            <div class="registration-part">
+                <button class="login-button">
+                    Daxil olun
+                </button>
+                <button class="register-button">
+                    Qeydiyyat
+                </button>
+            </div>
+        </nav>
+    </header>
+
+    <div class="header">
+        <h1>Müəllimlər və Təlimçilər</h1>
+        <p>Kurslarımızın peşəkar və təcrübəli müəllim heyəti</p>
+    </div>
+
+    <section class="teachers-section">
+        <!-- Teacher 1 -->
+        <div class="teacher-card">
+            <img src="./course-img/course-img-ramal.png" alt="Müəllim 1">
+            <div class="card-body">
+                <h3>Ramil Əsgərov</h3>
+                <p>Proqramlaşdırma üzrə baş müəllim</p>
+                <div class="social-icons">
+                    <a href="#"><i class="fa-brands fa-linkedin"></i></a>
+                    <a href="#"><i class="fa-brands fa-telegram"></i></a>
+                    <a href="mailto:ramil@example.com"><i class="fa-solid fa-envelope"></i></a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Teacher 2 -->
+        <div class="teacher-card">
+            <img src="https://via.placeholder.com/400x280" alt="Müəllim 2">
+            <div class="card-body">
+                <h3>Aynur Məmmədova</h3>
+                <p>İnformatika və dizayn üzrə müəllim</p>
+                <div class="social-icons">
+                    <a href="#"><i class="fa-brands fa-linkedin"></i></a>
+                    <a href="#"><i class="fa-brands fa-telegram"></i></a>
+                    <a href="mailto:aynur@example.com"><i class="fa-solid fa-envelope"></i></a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Teacher 3 -->
+        <div class="teacher-card">
+            <img src="https://via.placeholder.com/400x280" alt="Müəllim 3">
+            <div class="card-body">
+                <h3>Elvin Hüseynov</h3>
+                <p>Riyaziyyat üzrə təlimçi</p>
+                <div class="social-icons">
+                    <a href="#"><i class="fa-brands fa-linkedin"></i></a>
+                    <a href="#"><i class="fa-brands fa-telegram"></i></a>
+                    <a href="mailto:elvin@example.com"><i class="fa-solid fa-envelope"></i></a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Teacher 4 -->
+        <div class="teacher-card">
+            <img src="https://via.placeholder.com/400x280" alt="Müəllim 4">
+            <div class="card-body">
+                <h3>Nigar Quliyeva</h3>
+                <p>İngilis dili üzrə müəllim</p>
+                <div class="social-icons">
+                    <a href="#"><i class="fa-brands fa-linkedin"></i></a>
+                    <a href="#"><i class="fa-brands fa-telegram"></i></a>
+                    <a href="mailto:nigar@example.com"><i class="fa-solid fa-envelope"></i></a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Teacher 5 -->
+        <div class="teacher-card">
+            <img src="https://via.placeholder.com/400x280" alt="Müəllim 5">
+            <div class="card-body">
+                <h3>Orxan Məmmədli</h3>
+                <p>Fizika üzrə müəllim</p>
+                <div class="social-icons">
+                    <a href="#"><i class="fa-brands fa-linkedin"></i></a>
+                    <a href="#"><i class="fa-brands fa-telegram"></i></a>
+                    <a href="mailto:orxan@example.com"><i class="fa-solid fa-envelope"></i></a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Teacher 6 -->
+        <div class="teacher-card">
+            <img src="https://via.placeholder.com/400x280" alt="Müəllim 6">
+            <div class="card-body">
+                <h3>Səidə Həsənova</h3>
+                <p>Kimya üzrə təlimçi</p>
+                <div class="social-icons">
+                    <a href="#"><i class="fa-brands fa-linkedin"></i></a>
+                    <a href="#"><i class="fa-brands fa-telegram"></i></a>
+                    <a href="mailto:saide@example.com"><i class="fa-solid fa-envelope"></i></a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Teacher 7 -->
+        <div class="teacher-card">
+            <img src="https://via.placeholder.com/400x280" alt="Müəllim 7">
+            <div class="card-body">
+                <h3>Fərid Əliyev</h3>
+                <p>Biologiya üzrə müəllim</p>
+                <div class="social-icons">
+                    <a href="#"><i class="fa-brands fa-linkedin"></i></a>
+                    <a href="#"><i class="fa-brands fa-telegram"></i></a>
+                    <a href="mailto:farid@example.com"><i class="fa-solid fa-envelope"></i></a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Teacher 8 -->
+        <div class="teacher-card">
+            <img src="https://via.placeholder.com/400x280" alt="Müəllim 8">
+            <div class="card-body">
+                <h3>Elçin Rzayev</h3>
+                <p>Tarix üzrə müəllim</p>
+                <div class="social-icons">
+                    <a href="#"><i class="fa-brands fa-linkedin"></i></a>
+                    <a href="#"><i class="fa-brands fa-telegram"></i></a>
+                    <a href="mailto:elchin@example.com"><i class="fa-solid fa-envelope"></i></a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Teacher 9 -->
+        <div class="teacher-card">
+            <img src="https://via.placeholder.com/400x280" alt="Müəllim 9">
+            <div class="card-body">
+                <h3>Nərmin Qasımova</h3>
+                <p>Ədəbiyyat üzrə təlimçi</p>
+                <div class="social-icons">
+                    <a href="#"><i class="fa-brands fa-linkedin"></i></a>
+                    <a href="#"><i class="fa-brands fa-telegram"></i></a>
+                    <a href="mailto:nermin@example.com"><i class="fa-solid fa-envelope"></i></a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Teacher 10 -->
+        <div class="teacher-card">
+            <img src="https://via.placeholder.com/400x280" alt="Müəllim 10">
+            <div class="card-body">
+                <h3>Rəşad Məmmədov</h3>
+                <p>Coğrafiya üzrə müəllim</p>
+                <div class="social-icons">
+                    <a href="#"><i class="fa-brands fa-linkedin"></i></a>
+                    <a href="#"><i class="fa-brands fa-telegram"></i></a>
+                    <a href="mailto:resad@example.com"><i class="fa-solid fa-envelope"></i></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="footer-top">
+            <p>Ən yaxşı şirkətlər <a href="#">Biznes Platformamızı</a> seçərək tələb olunan bacarıqları inkişaf
+                etdirirlər.</p>
+            <div class="footer-logos">
+                <img src="nasdaq-logo.png" alt="Nasdaq">
+                <img src="volkswagen-logo.png" alt="VW">
+                <img src="netapp-logo.png" alt="NetApp">
+                <img src="eventbrite-logo.png" alt="Eventbrite">
+            </div>
+        </div>
+
+        <div class="footer-links">
+            <div>
+                <h4>Tələb Olunan Peşələr</h4>
+                <a href="#">Məlumat Alimi</a>
+                <a href="#">Full Stack Veb Proqramçı</a>
+                <a href="#">Bulud Mühəndisi</a>
+                <a href="#">Layihə Meneceri</a>
+                <a href="#">Oyun Yaradıcı</a>
+                <a href="#">Bütün Peşələr</a>
+            </div>
+            <div>
+                <h4>Veb İnkişaf</h4>
+                <a href="#">Veb İnkişaf</a>
+                <a href="#">JavaScript</a>
+                <a href="#">React JS</a>
+                <a href="#">Angular</a>
+                <a href="#">Java</a>
+            </div>
+            <div>
+                <h4>İT Sertifikatlar</h4>
+                <a href="#">Amazon AWS</a>
+                <a href="#">Azure Fundamentals</a>
+                <a href="#">Həll Memarı</a>
+                <a href="#">Kubernetes</a>
+            </div>
+            <div>
+                <h4>Məlumat Elmi</h4>
+                <a href="#">Python</a>
+                <a href="#">Maşın Öyrənməsi</a>
+                <a href="#">Dərin Öyrənmə</a>
+                <a href="#">Süni İntellekt</a>
+            </div>
+            <div>
+                <h4>Biznes Analitika</h4>
+                <a href="#">Excel</a>
+                <a href="#">SQL</a>
+                <a href="#">Power BI</a>
+                <a href="#">Biznes Analizi</a>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <div class="footer-col">
+                <h4>Haqqımızda</h4>
+                <a href="#">Şirkət haqqında</a>
+                <a href="#">Karyera</a>
+                <a href="#">Bizimlə əlaqə</a>
+                <a href="#">Bloq</a>
+                <a href="#">Investorlar</a>
+            </div>
+            <div class="footer-col">
+                <h4>Kəşf et</h4>
+                <a href="#">Mobil tətbiq</a>
+                <a href="#">Müəllim ol</a>
+                <a href="#">Planlar və Qiymətlər</a>
+                <a href="#">Tərəfdaşlıq</a>
+                <a href="#">Dəstək</a>
+            </div>
+            <div class="footer-col">
+                <h4>Biznes üçün</h4>
+                <a href="#">Biznes Həlləri</a>
+            </div>
+            <div class="footer-col">
+                <h4>Hüquqi</h4>
+                <a href="#">Əlçatanlıq</a>
+                <a href="#">Məxfilik siyasəti</a>
+                <a href="#">Sayt xəritəsi</a>
+                <a href="#">Şərtlər</a>
+            </div>
+        </div>
+
+        <div class="footer-copy">
+            <p>© 2025 Platforma, MMC.</p>
+            <div class="language">🌐 Azərbaycan dili</div>
+        </div>
+    </footer>
+
+</body>
+
+</html>
