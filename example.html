@@ -1,266 +1,115 @@
 <!DOCTYPE html>
 <html lang="az">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Mikrofonla axtarış — Demo</title>
+  <meta charset="UTF-8">
+  <title>Tag Carousel</title>
   <style>
-    body { font-family: Arial, sans-serif; max-width:900px; margin:24px auto; line-height:1.5; color:#111; }
-    h1 { font-size:20px; margin-bottom:8px; }
-    .controls { display:flex; gap:8px; align-items:center; margin-bottom:12px; flex-wrap:wrap; }
-    button { padding:8px 12px; border-radius:6px; border:1px solid #888; background:#f6f6f6; cursor:pointer; }
-    button.recording { background:#ffdcdc; border-color:#d33; }
-    input[type="text"] { padding:8px; border-radius:6px; border:1px solid #ccc; width:320px; }
-    .results { margin-top:16px; }
-    .item { padding:8px; border-bottom:1px solid #eee; }
-    .highlight { background: #fffa8a; font-weight:600; }
-    small.status { color:#666; display:block; margin-top:6px; }
-    label { font-size:14px; }
-    .settings { margin-left:8px; }
+    .carousel-container {
+      width: 600px;
+      margin: 20px auto;
+      text-align: center;
+      font-family: Arial;
+    }
+
+    .tags {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr); /* 6 sütun */
+      gap: 8px;
+      margin-bottom: 15px;
+    }
+
+    .tag {
+      background: #007bff;
+      color: white;
+      padding: 6px 10px;
+      border-radius: 6px;
+      font-size: 14px;
+    }
+
+    .controls {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    button {
+      padding: 6px 12px;
+      border: none;
+      background: #007bff;
+      color: white;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    .page-info {
+      font-weight: bold;
+    }
   </style>
 </head>
 <body>
+  <div class="carousel-container">
+    <div class="tags" id="tagsBox"></div>
 
-  <h1>Mikrofonla axtarış (Array-dən)</h1>
-  <p>Mic icon-a bas və danış — səs mətnə çevriləcək və array içindən uyğun elementlər göstəriləcək. Əgər browser-in Speech Recognition dəstəkləmirsə, əl ilə yazıb da axtarış edə bilərsən.</p>
-
-  <div class="controls">
-    <button id="toggleRec">🎤 Mikrofonu başlat</button>
-    <input id="textInput" type="text" placeholder="Əl ilə yazıb axtarış et..." />
-    <button id="searchBtn">Axtar</button>
-
-    <label class="settings">
-      <input id="fuzzyChk" type="checkbox" /> fuzzy axtarış
-    </label>
-
-    <label class="settings">
-      <input id="caseChk" type="checkbox" checked /> Case-insensitive
-    </label>
+    <div class="controls">
+      <button id="prevBtn">← Geri</button>
+      <div class="page-info" id="pageInfo">Səhifə 1/1</div>
+      <button id="nextBtn">İrəli →</button>
+    </div>
   </div>
 
-  <small class="status" id="status">Status: hazır</small>
+  <script>
+    // 1) Tag-ları yaradırıq
+    const allTags = [];
+    for (let i = 1; i <= 53; i++) { // məsələn 53 tag
+      allTags.push("Tag " + i);
+    }
 
-  <div class="results" id="results">
-    <!-- nəticələr buraya gələcək -->
-  </div>
+    // 2) Parametrlər
+    const tagsPerPage = 24;
+    let currentPage = 1;
+    const totalPages = Math.ceil(allTags.length / tagsPerPage);
 
-<script>
-/*
-  Tam işlək nümunə:
-  - Web Speech API (SpeechRecognition) istifadə olunur.
-  - Microfonu başlat/stop üçün düymə.
-  - Alınan mətnə görə array-dən substring və ya Levenshtein fuzzy axtarışı.
-  - Fallback: SpeechRecognition mövcud deyilsə, sadəcə əl ilə axtar.
-*/
+    const tagsBox = document.getElementById("tagsBox");
+    const pageInfo = document.getElementById("pageInfo");
+    const prevBtn = document.getElementById("prevBtn");
+    const nextBtn = document.getElementById("nextBtn");
 
-// Demo array (səni maraqlandıran array-i burada dəyişə bilərsən)
-const dataArray = [
-  "Azerbaycan tarixi",
-  "Django ilə veb proqramlaşdırma",
-  "Node.js və Express",
-  "React əsaslari",
-  "Verilənlər bazası dizaynı",
-  "Machine learning prinsipləri",
-  "Data structures and algorithms",
-  "Frontend optimizasiya",
-  "Backend servis arxitekturası",
-  "Video processing və media serverlər",
-  "Cloud infrastrukturu (AWS, GCP, Azure)",
-  "Kiber təhlükəsizlik əsasları",
-  "Microservices pattern",
-  "Real-time tətbiqlər (WebSocket, Socket.io)"
-];
+    // 3) Səhifəni göstərən funksiya
+    function renderPage(page) {
+      tagsBox.innerHTML = "";
+      const start = (page - 1) * tagsPerPage;
+      const end = start + tagsPerPage;
+      const tags = allTags.slice(start, end);
 
-// DOM elementləri
-const toggleRecBtn = document.getElementById('toggleRec');
-const textInput = document.getElementById('textInput');
-const searchBtn = document.getElementById('searchBtn');
-const resultsDiv = document.getElementById('results');
-const statusEl = document.getElementById('status');
-const fuzzyChk = document.getElementById('fuzzyChk');
-const caseChk = document.getElementById('caseChk');
+      tags.forEach(tag => {
+        const el = document.createElement("div");
+        el.className = "tag";
+        el.textContent = tag;
+        tagsBox.appendChild(el);
+      });
 
-let recognition = null;
-let isRecording = false;
+      pageInfo.textContent = "Səhifə " + page + "/" + totalPages;
+      prevBtn.disabled = page === 1;
+      nextBtn.disabled = page === totalPages;
+    }
 
-// Levenshtein məsafəsi funksiyası (fuzzy üçün)
-function levenshtein(a, b) {
-  if (!a) return b.length;
-  if (!b) return a.length;
-  a = a.split('');
-  b = b.split('');
-  const matrix = [];
-  for (let i = 0; i <= b.length; i++) {
-    matrix[i] = [i];
-  }
-  for (let j = 0; j <= a.length; j++) {
-    matrix[0][j] = j;
-  }
-  for (let i = 1; i <= b.length; i++) {
-    for (let j = 1; j <= a.length; j++) {
-      if (b[i-1] === a[j-1]) {
-        matrix[i][j] = matrix[i-1][j-1];
-      } else {
-        matrix[i][j] = Math.min(
-          matrix[i-1][j] + 1,    // deletion
-          matrix[i][j-1] + 1,    // insertion
-          matrix[i-1][j-1] + 1   // substitution
-        );
+    // 4) Nəzarət düymələri
+    prevBtn.addEventListener("click", () => {
+      if (currentPage > 1) {
+        currentPage--;
+        renderPage(currentPage);
       }
-    }
-  }
-  return matrix[b.length][a.length];
-}
+    });
 
-// Axtarış funksiyası
-function searchArray(query) {
-  const useCaseInsensitive = caseChk.checked;
-  const useFuzzy = fuzzyChk.checked;
-
-  if (!query || !query.trim()) {
-    resultsDiv.innerHTML = '<div class="item">Axtarış mətnini daxil et.</div>';
-    return;
-  }
-
-  const q = useCaseInsensitive ? query.toLowerCase() : query;
-
-  // Nəticələri topla
-  const results = dataArray.map(item => {
-    const itemKey = useCaseInsensitive ? item.toLowerCase() : item;
-    let score = Infinity;
-    let match = false;
-
-    // Substring yoxlaması
-    if (itemKey.includes(q)) {
-      score = 0; // dəqiq uyğunluq ən yaxşıdır
-      match = true;
-    } else if (useFuzzy) {
-      // fuzzy: Levenshtein məsafəsini hesabla nisbətən kiçikdirsə uyğun say
-      const dist = levenshtein(itemKey, q);
-      // məsafəni normalizasiya etmək üçün element uzunluğunu nəzərə alaq
-      const norm = dist / Math.max(itemKey.length, q.length);
-      // norm < 0.5 qəbul edirik (səni uyğun hesab edirik) — lazım olsa dəyişdir
-      if (norm <= 0.45) {
-        score = norm;
-        match = true;
+    nextBtn.addEventListener("click", () => {
+      if (currentPage < totalPages) {
+        currentPage++;
+        renderPage(currentPage);
       }
-    }
+    });
 
-    return { item, match, score };
-  }).filter(r => r.match).sort((a,b) => a.score - b.score);
-
-  // Render et
-  if (results.length === 0) {
-    resultsDiv.innerHTML = '<div class="item">Uyğun nəticə tapılmadı.</div>';
-    return;
-  }
-
-  resultsDiv.innerHTML = results.map(r => {
-    // highlight: query hissəsini vurğula (substring olduqda)
-    let display = r.item;
-    const useCI = caseChk.checked;
-    if (!useFuzzy && (useCI ? r.item.toLowerCase().includes(q) : r.item.includes(q))) {
-      const idx = useCI ? r.item.toLowerCase().indexOf(q) : r.item.indexOf(q);
-      if (idx !== -1) {
-        const before = r.item.slice(0, idx);
-        const matchText = r.item.slice(idx, idx + q.length);
-        const after = r.item.slice(idx + q.length);
-        display = `${escapeHtml(before)}<span class="highlight">${escapeHtml(matchText)}</span>${escapeHtml(after)}`;
-      } else {
-        display = escapeHtml(r.item);
-      }
-    } else {
-      display = escapeHtml(r.item);
-    }
-    return `<div class="item">${display}</div>`;
-  }).join('');
-}
-
-// Sadə HTML escape
-function escapeHtml(text) {
-  return text.replace(/[&<>"']/g, function(m) {
-    return { '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;' }[m];
-  });
-}
-
-// Search düyməsi handler
-searchBtn.addEventListener('click', () => {
-  const q = textInput.value.trim();
-  statusEl.textContent = 'Status: axtarılır...';
-  searchArray(q);
-  statusEl.textContent = 'Status: hazır';
-});
-
-// Enter ilə axtar
-textInput.addEventListener('keydown', (e) => {
-  if (e.key === 'Enter') {
-    searchBtn.click();
-  }
-});
-
-/* --- SpeechRecognition inizializasiyası --- */
-function initSpeechRecognition() {
-  const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
-  if (!SpeechRecognition) {
-    statusEl.textContent = 'Status: Browser-in Web Speech API dəstəkləmir. Əl ilə yazıb axtar.';
-    toggleRecBtn.disabled = true;
-    return;
-  }
-
-  recognition = new SpeechRecognition();
-  recognition.lang = 'az-AZ'; // Azərbaycan dili varsa, yoxsa 'en-US' ilə dəyişdir
-  recognition.interimResults = false; // nəticəni bir dəfə alırıq
-  recognition.maxAlternatives = 1;
-
-  recognition.addEventListener('start', () => {
-    isRecording = true;
-    toggleRecBtn.classList.add('recording');
-    toggleRecBtn.textContent = '⏺️ Yazılır... (basıb dayandır)';
-    statusEl.textContent = 'Status: mikrofon aktiv. Danışın...';
-  });
-
-  recognition.addEventListener('end', () => {
-    isRecording = false;
-    toggleRecBtn.classList.remove('recording');
-    toggleRecBtn.textContent = '🎤 Mikrofonu başlat';
-    statusEl.textContent = 'Status: hazırlanır';
-  });
-
-  recognition.addEventListener('error', (e) => {
-    statusEl.textContent = 'Status: Səsləndirmədə xəta: ' + (e.error || 'unknown');
-  });
-
-  recognition.addEventListener('result', (e) => {
-    const transcript = e.results[0][0].transcript;
-    // mətni inputa qoy və axtarış et
-    textInput.value = transcript;
-    statusEl.textContent = 'Status: Tanındı — "' + transcript + '"';
-    searchArray(transcript);
-  });
-}
-
-// Mikrofon düyməsi
-toggleRecBtn.addEventListener('click', () => {
-  if (!recognition) {
-    statusEl.textContent = 'Status: SpeechRecognition aktiv deyil bu brauzerdə.';
-    return;
-  }
-  if (!isRecording) {
-    try {
-      recognition.start();
-    } catch (err) {
-      // start bir neçə dəfə çağırıla bilər: handle edin
-      console.warn('recognition.start error:', err);
-    }
-  } else {
-    recognition.stop();
-  }
-});
-
-// Init
-initSpeechRecognition();
-statusEl.textContent = 'Status: hazır. Mikrofon düyməsinə bas və danış.';
-
-</script>
+    // İlk səhifəni göstər
+    renderPage(currentPage);
+  </script>
 </body>
 </html>

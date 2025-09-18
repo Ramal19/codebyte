@@ -1,5 +1,21 @@
 let searchInp = document.getElementById("search-inp");
 let searchIcon = document.getElementById("search-icon");
+let scrollBtn = document.getElementById("scrollBtn");
+
+window.addEventListener("scroll", ()=>{
+    if(window.scrollY <= 100) {
+        scrollBtn.style.display = "none";
+    } else {
+        scrollBtn.style.display = "block"
+    }
+})
+
+scrollBtn.addEventListener("click", ()=>{
+    window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+    });
+})
 
 searchInp.addEventListener("input", () => {
 
@@ -100,7 +116,7 @@ answerBox.forEach((element) => {
 let heartIcon = document.querySelector(".bi-heart");
 let cartIcon = document.querySelector(".bi-cart");
 
-heartIcon.onclick = ()=>{
+heartIcon.onclick = () => {
 
     window.location.href = "./wishlist.html"
 }
@@ -117,13 +133,13 @@ heartIcon.addEventListener("mouseout", () => {
     heartIcon.style.cssText = "color: #000; font-size: 24px;"
 })
 
-cartIcon.addEventListener("mouseover", ()=>{
+cartIcon.addEventListener("mouseover", () => {
 
     cartIcon.classList.replace("bi-cart", "bi-cart-fill");
     cartIcon.style.cssText = "font-size: 24px"
 })
 
-cartIcon.addEventListener("mouseout", ()=>{
+cartIcon.addEventListener("mouseout", () => {
 
     cartIcon.classList.replace("bi-cart-fill", "bi-cart");
 })
@@ -131,22 +147,22 @@ cartIcon.addEventListener("mouseout", ()=>{
 
 document.querySelectorAll("#wishlist-btn").forEach(btn => {
     btn.addEventListener("click", () => {
-      let card = btn.closest(".course-card");
+        let card = btn.closest(".course-card");
 
-      let course = {
-        id: card.dataset.id,
-        title: card.dataset.title,
-        price: card.dataset.price
-      };
+        let course = {
+            id: card.dataset.id,
+            title: card.dataset.title,
+            price: card.dataset.price
+        };
 
-      let wishlist = JSON.parse(localStorage.getItem("wishlist")) || [];
+        let wishlist = JSON.parse(localStorage.getItem("wishlist")) || [];
 
-      if (!wishlist.some(item => item.id === course.id)) {
-        wishlist.push(course);
-        localStorage.setItem("wishlist", JSON.stringify(wishlist));
-        alert(`${course.title} sevimlilərə əlavə olundu!`);
-      } else {
-        alert(`${course.title} artıq sevimlilərdədir!`);
-      }
+        if (!wishlist.some(item => item.id === course.id)) {
+            wishlist.push(course);
+            localStorage.setItem("wishlist", JSON.stringify(wishlist));
+            alert(`${course.title} sevimlilərə əlavə olundu!`);
+        } else {
+            alert(`${course.title} artıq sevimlilərdədir!`);
+        }
     });
-  });
+});
