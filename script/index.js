@@ -1,16 +1,65 @@
 let searchInp = document.getElementById("search-inp");
 let searchIcon = document.getElementById("search-icon");
 let scrollBtn = document.getElementById("scrollBtn");
+const exitBtn = document.getElementById("exitBtn")
+const timerModal = document.querySelector(".timer-fade")
+const locationCourse = document.getElementById("locationCourse")
 
-window.addEventListener("scroll", ()=>{
-    if(window.scrollY <= 100) {
+if (localStorage.getItem("exitBtn") === "true" || localStorage.getItem("locationCourse") === "true") {
+    timerModal.style.display = "none"; 
+}
+
+exitBtn.addEventListener("click", ()=>{
+
+    timerModal.style.display = "none";
+    localStorage.setItem("exitBtn", "true");
+})
+
+locationCourse.onclick = () => {
+
+    window.location.href = "./document/kurs.html"
+    localStorage.setItem("locationCourse", "true");
+}
+
+// COUNTDOWN 1 AYLIQ
+
+const countDownDate = new Date();
+countDownDate.setMonth(countDownDate.getMonth() + 1);
+
+const countdownEl = document.querySelector(".countdown");
+
+const timer = setInterval(() => {
+    const now = new Date().getTime();
+    const distance = countDownDate - now;
+
+    if (distance <= 0) {
+        clearInterval(timer);
+        countdownEl.innerHTML = "<span>Vaxt bitdi</span>";
+        return;
+    }
+
+    const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+    const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+    countdownEl.innerHTML = `
+        <span>${days} gün</span> 
+        <span>${hours} saat</span> 
+        <span>${minutes} dəq</span> 
+        <span>${seconds} san</span>
+    `;
+}, 1000);
+
+window.addEventListener("scroll", () => {
+    if (window.scrollY <= 100) {
         scrollBtn.style.display = "none";
     } else {
         scrollBtn.style.display = "block"
     }
 })
 
-scrollBtn.addEventListener("click", ()=>{
+scrollBtn.addEventListener("click", () => {
     window.scrollTo({
         top: 0,
         behavior: "smooth"
@@ -118,7 +167,7 @@ let cartIcon = document.querySelector(".bi-cart");
 
 heartIcon.onclick = () => {
 
-    window.location.href = "./wishlist.html"
+    window.location.href = "./document/wishlist.html"
 }
 
 heartIcon.addEventListener("mouseover", () => {
