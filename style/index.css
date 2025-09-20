@@ -1344,3 +1344,38 @@ li > a:hover {
 .footer-copy .language {
   cursor: pointer;
 }
+
+@media (max-width: 600px) {
+
+  header > .navbar > ul {
+
+    display: none;
+  }
+
+  header > .navbar > .registration-part {
+
+    display: none;
+  }
+
+  header > .navbar > .search-bar, .add {
+
+    display: none;
+  }
+
+  header > .navbar > .menu > .bi-list {
+
+    font-size: 32px;
+  }
+
+  header > .navbar > .responsive {
+
+    display: flex;
+    gap: 10px;
+  }
+
+  header > .navbar > .responsive > .bi-search, .bi-cart, .bi-heart {
+
+    font-size: 32px;
+  }
+
+}

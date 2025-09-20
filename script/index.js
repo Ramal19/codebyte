@@ -6,10 +6,10 @@ const timerModal = document.querySelector(".timer-fade")
 const locationCourse = document.getElementById("locationCourse")
 
 if (localStorage.getItem("exitBtn") === "true" || localStorage.getItem("locationCourse") === "true") {
-    timerModal.style.display = "none"; 
+    timerModal.style.display = "none";
 }
 
-exitBtn.addEventListener("click", ()=>{
+exitBtn.addEventListener("click", () => {
 
     timerModal.style.display = "none";
     localStorage.setItem("exitBtn", "true");
@@ -76,7 +76,6 @@ searchInp.addEventListener("input", () => {
         searchIcon.style.display = "none";
     }
 })
-
 let slideBox = document.querySelector(".slide-box");
 
 let slideFirst = `
@@ -98,14 +97,30 @@ let slideSecond = `
 let arr = [slideFirst, slideSecond];
 let index = 0;
 
-slideBox.innerHTML = arr[index];
+// Slaydı göstərmək və butona event bağlamaq üçün funksiya
+function showSlide(i) {
+    slideBox.innerHTML = arr[i];
 
+    // Slayd yükləndikdən sonra butonu seçirik
+    let beginButton = slideBox.querySelector(".begin-button");
+    beginButton.addEventListener("click", () => {
+        window.scrollTo({
+            top: 708,
+            behavior: "smooth"
+        })
+    });
+}
+
+// İlk slaydı göstəririk
+showSlide(index);
+
+// Avtomatik dəyişmə
 setInterval(() => {
     index++;
     if (index > arr.length - 1) {
         index = 0;
     }
-    slideBox.innerHTML = arr[index];
+    showSlide(index);
 }, 5000);
 
 let books = document.getElementById("booksHtmlSwitch");
