@@ -1,0 +1,111 @@
+<!-- <!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Ana səhifə</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <h1>Ana Səhifə</h1>
+  <button id="check">Profil məlumatı</button>
+  <p id="result"></p>
+
+  <script>
+    document.getElementById("check").addEventListener("click", async () => {
+      const token = localStorage.getItem("token");
+      if (!token) return alert("Əvvəlcə login olun");
+      const res = await fetch("http://localhost:3000/profile", {
+        headers: { "Authorization": "Bearer " + token }
+      });
+      const data = await res.json();
+      document.getElementById("result").innerText = JSON.stringify(data);
+    });
+  </script>
+</body>
+</html> -->
+
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Postlar</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<h1>Paylaşımlar</h1>
+
+<div id="authActions">
+  <input type="file" id="imageInput">
+  <button id="uploadBtn">Paylaş</button>
+  <button id="logoutBtn">Çıxış</button>
+</div>
+
+<div id="posts"></div>
+
+<script>
+const token = localStorage.getItem("token");
+if (!token) {
+  alert("Əvvəlcə login olmalısınız");
+  window.location.href = "login.html";
+}
+
+const postsDiv = document.getElementById("posts");
+
+async function loadPosts() {
+  const res = await fetch("http://localhost:3000/posts");
+  const posts = await res.json();
+  postsDiv.innerHTML = "";
+  posts.reverse().forEach(p => {
+    const div = document.createElement("div");
+    div.innerHTML = `
+      <p><b>${p.username}</b></p>
+      <img src="http://localhost:3000/uploads/${p.filename}" width="200">
+    `;
+    // Öz postumuzsa silmək düyməsi
+    const me = parseJwt(token).username;
+    if (p.username === me) {
+      const btn = document.createElement("button");
+      btn.textContent = "Sil";
+      btn.onclick = () => deletePost(p.id);
+      div.appendChild(btn);
+    }
+    postsDiv.appendChild(div);
+  });
+}
+
+function parseJwt (t) {
+  return JSON.parse(atob(t.split('.')[1]));
+}
+
+async function deletePost(id){
+  await fetch("http://localhost:3000/posts/" + id, {
+    method: "DELETE",
+    headers: { "Authorization": "Bearer " + token }
+  });
+  loadPosts();
+}
+
+document.getElementById("uploadBtn").addEventListener("click", async () => {
+  const file = document.getElementById("imageInput").files[0];
+  if (!file) return alert("Fayl seçin");
+  const formData = new FormData();
+  formData.append("image", file);
+
+  await fetch("http://localhost:3000/posts", {
+    method: "POST",
+    headers: { "Authorization": "Bearer " + token },
+    body: formData
+  });
+  loadPosts();
+});
+
+document.getElementById("logoutBtn").onclick = () => {
+  localStorage.removeItem("token");
+  location.href = "login.html";
+};
+
+loadPosts();
+</script>
+</body>
+</html>
