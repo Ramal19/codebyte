@@ -56,6 +56,22 @@
   position: relative;
 }
 
+.password>.bi-eye-fill {
+
+  position: absolute;
+  right: 10px;
+  top: 8px;
+  font-size: 18px;
+}
+
+.password>.bi-eye-slash-fill {
+
+  position: absolute;
+  right: 10px;
+  top: 8px;
+  font-size: 18px;
+}
+
 .username > .username-icon,
 .email > .email-icon,
 .password > .password-icon {

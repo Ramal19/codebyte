@@ -23,7 +23,7 @@ const loginBtn = document.getElementById("login");
 const registerBtn = document.getElementById("register");
 const courseCard = document.querySelector(".course-card")
 
-courseCard.addEventListener("click", ()=>{
+courseCard.addEventListener("click", () => {
 
     window.location.href = "../document/ders.html"
 })
@@ -262,3 +262,30 @@ document.querySelectorAll("#wishlist-btn").forEach(btn => {
         }
     });
 });
+
+const userData = localStorage.getItem("registeredUser");
+const userInfo = document.getElementById("userInfo");
+
+if (userData) {
+    // Əgər istifadəçi məlumatı varsa
+    const user = JSON.parse(userData);
+
+    // Qeydiyyat düyməsini gizlədirik
+    registerBtn.style.display = "none";
+    loginBtn.style.display = "none";
+
+    // İstifadəçi məlumatlarını göstəririk
+    userInfo.innerHTML = `
+        <p><strong>İstifadəçi:</strong> ${user.username}</p>
+        <p><strong>Email:</strong> ${user.email}</p>
+      `;
+} else {
+    // Əgər qeydiyyat yoxdursa, düymə işlək qalsın
+    registerBtn.addEventListener("click", () => {
+        window.location.href = "register.html";
+    });
+    loginBtn.addEventListener("click", ()=>{
+        window.location.href = "login.html";
+
+    })
+}

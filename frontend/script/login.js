@@ -1,28 +1,31 @@
-// const btn = document.getElementById("location")
+const btn = document.getElementById("location")
 // btn.onclick = () => {
 //     window.location.href = "./register.html"
 // }
 
-// const form = document.getElementById("loginForm");
-// form.addEventListener("submit", async (e) => {
-//     e.preventDefault();
-//     const data = {
-//         username: form.username.value,
-//         password: form.password.value
-//     };
-//     const res = await fetch("http://localhost:3000/login", {
-//         method: "POST",
-//         headers: { "Content-Type": "application/json" },
-//         body: JSON.stringify(data)
-//     });
-//     const json = await res.json();
-//     if (res.ok) {
-//         localStorage.setItem("token", json.token);
-//         document.getElementById("msg").innerText = "Giriş uğurludur!";
-//     } else {
-//         document.getElementById("msg").innerText = json.message;
-//     }
-// });
+const form = document.getElementById("loginForm");
+form.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const data = {
+        username: form.username.value,
+        password: form.password.value
+    };
+    const res = await fetch("http://localhost:3000/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data)
+    });
+    const json = await res.json();
+    if (res.ok) {
+        localStorage.setItem("token", json.token);
+        // document.getElementById("msg").innerText = "Giriş uğurludur!";
+        alert("Giris ugurludur")
+
+    } else {
+        // document.getElementById("msg").innerText = json.message;
+        alert(json.message)
+    }
+});
 
 
 const inputs = document.querySelectorAll(".input");
@@ -56,4 +59,3 @@ icons.forEach((el, index) => {
         }
     })
 });
-

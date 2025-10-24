@@ -3,5 +3,40 @@
     "username": "111",
     "password": "$2b$10$g./T/41wHX2pubN5f2SsqOtO68w/ZxNkFdGDu0fVB9YRcoHBaCZ06",
     "role": "user"
+  },
+  {
+    "username": "Ramal",
+    "password": "$2b$10$CitNqixDOmHuqgQbNjfN9uPBlUmffV4FRcaISPU4v7YnQXj4whbTO",
+    "role": "user"
+  },
+  {
+    "username": "12",
+    "email": "ld4xz51vd@code.edu.az",
+    "password": "$2b$10$0DMwJSoryQw6cNI.H2FQc.yvqk4QfaIpqSqaftjQljfAvhW0Y31tG",
+    "role": "user"
+  },
+  {
+    "username": "1233333",
+    "email": "123@gmail.com",
+    "password": "$2b$10$0yv2FTu7mVD7H/btiFFWzuI50ufypXY7IiMT.kpRx1/j2StQRoUNG",
+    "role": "user"
+  },
+  {
+    "username": "RamalA",
+    "email": "aaa@gmail.com",
+    "password": "$2b$10$cPhkY.C0zEaL9kLu8B5brOBW3PNayvXIHi5zv.MnKYtDLBdXGmW8W",
+    "role": "user"
+  },
+  {
+    "username": "ramal",
+    "email": "ramalesgerov@icloud.com",
+    "password": "$2b$10$IOIAuSzv4l.aeC/JVYKKDedTih2y72luV9LLhGw3T60aGIBAhuZpq",
+    "role": "user"
+  },
+  {
+    "username": "ramal1",
+    "email": "ramalesgerovv@icloud.com",
+    "password": "$2b$10$7jW5UHR.8F6G7BdiwOzobugSxkUh7mENw0sw47dtutb3dF/9QW7W.",
+    "role": "user"
   }
 ]
