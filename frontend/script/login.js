@@ -1,7 +1,9 @@
 const btn = document.getElementById("location")
 // btn.onclick = () => {
-//     window.location.href = "./register.html"
+//     window.location.href = "./index.html"
 // }
+
+const userInp = document.getElementById("username-inp")
 
 const form = document.getElementById("loginForm");
 form.addEventListener("submit", async (e) => {
@@ -18,8 +20,15 @@ form.addEventListener("submit", async (e) => {
     const json = await res.json();
     if (res.ok) {
         localStorage.setItem("token", json.token);
+        localStorage.setItem("loginUser", JSON.stringify({
+            username: data.username,
+            // email: json.email
+        }));
+
         // document.getElementById("msg").innerText = "Giriş uğurludur!";
         alert("Giris ugurludur")
+        window.location.href = "../document/index.html"
+
 
     } else {
         // document.getElementById("msg").innerText = json.message;

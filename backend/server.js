@@ -1,74 +1,74 @@
-// // import express from "express";
-// // import fs from "fs";
-// // import bcrypt from "bcrypt";
-// // import jwt from "jsonwebtoken";
-// // import path from "path";
-// // import cors from "cors";
+// // // import express from "express";
+// // // import fs from "fs";
+// // // import bcrypt from "bcrypt";
+// // // import jwt from "jsonwebtoken";
+// // // import path from "path";
+// // // import cors from "cors";
 
-// // const app = express();
-// // const PORT = 3000;
-// // const SECRET = "super_secret_key"; // istəsən dəyişdir
+// // // const app = express();
+// // // const PORT = 3000;
+// // // const SECRET = "super_secret_key"; // istəsən dəyişdir
 
-// // const __dirname = path.resolve();
-// // const USERS_FILE = path.join(__dirname, "users.json");
+// // // const __dirname = path.resolve();
+// // // const USERS_FILE = path.join(__dirname, "users.json");
 
 
-// // app.use(cors());
-// // app.use(express.json());
+// // // app.use(cors());
+// // // app.use(express.json());
 
-// // // ✅ Helper: users.json oxu/yaz
-// // function readUsers() {
-// //   if (!fs.existsSync(USERS_FILE)) return [];
-// //   const data = fs.readFileSync(USERS_FILE);
-// //   return JSON.parse(data);
-// // }
+// // // // ✅ Helper: users.json oxu/yaz
+// // // function readUsers() {
+// // //   if (!fs.existsSync(USERS_FILE)) return [];
+// // //   const data = fs.readFileSync(USERS_FILE);
+// // //   return JSON.parse(data);
+// // // }
 
-// // function writeUsers(users) {
-// //   fs.writeFileSync(USERS_FILE, JSON.stringify(users, null, 2));
-// // }
+// // // function writeUsers(users) {
+// // //   fs.writeFileSync(USERS_FILE, JSON.stringify(users, null, 2));
+// // // }
 
-// // // ✅ Qeydiyyat
-// // app.post("/register", async (req, res) => {
-// //   const { username, password } = req.body;
-// //   if (!username || !password) return res.status(400).json({ message: "Boş ola bilməz" });
+// // // // ✅ Qeydiyyat
+// // // app.post("/register", async (req, res) => {
+// // //   const { username, password } = req.body;
+// // //   if (!username || !password) return res.status(400).json({ message: "Boş ola bilməz" });
 
-// //   const users = readUsers();
-// //   if (users.find(u => u.username === username))
-// //     return res.status(409).json({ message: "Bu istifadəçi artıq mövcuddur" });
+// // //   const users = readUsers();
+// // //   if (users.find(u => u.username === username))
+// // //     return res.status(409).json({ message: "Bu istifadəçi artıq mövcuddur" });
 
-// //   const hashed = await bcrypt.hash(password, 10);
-// //   users.push({ username, password: hashed, role: "user" });
-// //   writeUsers(users);
-// //   res.json({ message: "Qeydiyyat uğurla tamamlandı" });
-// // });
+// // //   const hashed = await bcrypt.hash(password, 10);
+// // //   users.push({ username, password: hashed, role: "user" });
+// // //   writeUsers(users);
+// // //   res.json({ message: "Qeydiyyat uğurla tamamlandı" });
+// // // });
 
-// // // ✅ Giriş
-// // app.post("/login", async (req, res) => {
-// //   const { username, password } = req.body;
-// //   const users = readUsers();
-// //   const user = users.find(u => u.username === username);
-// //   if (!user) return res.status(401).json({ message: "İstifadəçi tapılmadı" });
+// // // // ✅ Giriş
+// // // app.post("/login", async (req, res) => {
+// // //   const { username, password } = req.body;
+// // //   const users = readUsers();
+// // //   const user = users.find(u => u.username === username);
+// // //   if (!user) return res.status(401).json({ message: "İstifadəçi tapılmadı" });
 
-// //   const match = await bcrypt.compare(password, user.password);
-// //   if (!match) return res.status(401).json({ message: "Şifrə səhvdir" });
+// // //   const match = await bcrypt.compare(password, user.password);
+// // //   if (!match) return res.status(401).json({ message: "Şifrə səhvdir" });
 
-// //   const token = jwt.sign({ username: user.username, role: user.role }, SECRET, { expiresIn: "15m" });
-// //   res.json({ token });
-// // });
+// // //   const token = jwt.sign({ username: user.username, role: user.role }, SECRET, { expiresIn: "15m" });
+// // //   res.json({ token });
+// // // });
 
-// // // ✅ Mühafizə olunmuş məlumat (login tələb edir)
-// // app.get("/profile", (req, res) => {
-// //   const authHeader = req.headers["authorization"];
-// //   const token = authHeader && authHeader.split(" ")[1];
-// //   if (!token) return res.status(401).json({ message: "Token yoxdur" });
+// // // // ✅ Mühafizə olunmuş məlumat (login tələb edir)
+// // // app.get("/profile", (req, res) => {
+// // //   const authHeader = req.headers["authorization"];
+// // //   const token = authHeader && authHeader.split(" ")[1];
+// // //   if (!token) return res.status(401).json({ message: "Token yoxdur" });
 
-// //   jwt.verify(token, SECRET, (err, user) => {
-// //     if (err) return res.status(403).json({ message: "Token səhvdir və ya vaxtı bitib" });
-// //     res.json({ message: `Xoş gəldin ${user.username}!`, role: user.role });
-// //   });
-// // });
+// // //   jwt.verify(token, SECRET, (err, user) => {
+// // //     if (err) return res.status(403).json({ message: "Token səhvdir və ya vaxtı bitib" });
+// // //     res.json({ message: `Xoş gəldin ${user.username}!`, role: user.role });
+// // //   });
+// // // });
 
-// // app.listen(PORT, () => console.log(`Server işləyir: http://localhost:${PORT}`));
+// // // app.listen(PORT, () => console.log(`Server işləyir: http://localhost:${PORT}`));
 
 
 // import express from "express";
@@ -243,7 +243,7 @@ const storage = multer.diskStorage({
 const upload = multer({ storage });
 
 const app = express();
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 const SECRET = "super_secret_key";
 
 app.use(cors());
@@ -297,7 +297,7 @@ app.post("/register", async (req, res) => {
 
 // ---------- LOGIN (hələ username + password qalır) ----------
 app.post("/login", async (req, res) => {
-  const { username, password } = req.body;
+  const { username, password, } = req.body;
   const users = readUsers();
   const user = users.find(u => u.username === username);
   if (!user) return res.status(401).json({ message: "İstifadəçi tapılmadı" });
@@ -308,7 +308,7 @@ app.post("/login", async (req, res) => {
   const token = jwt.sign(
     { username: user.username, role: user.role },
     SECRET,
-    { expiresIn: "15m" }
+    { expiresIn: "30d" }
   );
   res.json({ token });
 });
@@ -317,17 +317,57 @@ app.get("/profile", auth, (req, res) => {
   res.json({ message: `Xoş gəldin ${req.user.username}!`, role: req.user.role });
 });
 
-app.post("/posts", auth, upload.single("image"), (req, res) => {
-  const posts = readPosts();
-  const newPost = {
-    id: Date.now().toString(),
-    username: req.user.username,
-    filename: req.file.filename
-  };
-  posts.push(newPost);
-  writePosts(posts);
-  res.json(newPost);
+// app.post("/posts", auth, upload.single("image"), (req, res) => {
+//   const posts = readPosts();
+//   const newPost = {
+//     id: Date.now().toString(),
+//     username: req.user.username,
+//     filename: req.file.filename,
+//     text: req.body.text
+//   };
+//   posts.push(newPost);
+//   writePosts(posts);
+//   res.json(newPost);
+// });
+
+// app.post("/posts", auth, upload.fields([{ name: "video" }, { name: "cover" }]), (req, res) => {
+//   const posts = readPosts();
+//   const newPost = {
+//     id: Date.now().toString(),
+//     username: req.user.username,
+//     text: req.body.text || "",
+//     video: req.files.video[0].filename,   // video fayl
+//     cover: req.files.cover[0].filename    // qapaq şəkil
+//   };
+//   posts.push(newPost);
+//   writePosts(posts);
+//   res.json(newPost);
+// });
+
+app.post("/posts", auth, upload.fields([{ name: "video" }, { name: "cover" }]), (req, res) => {
+  try {
+    if (!req.files || !req.files.video || !req.files.cover) {
+      return res.status(400).json({ message: "Video və ya cover faylı göndərilməyib" });
+    }
+
+    const posts = readPosts();
+    const newPost = {
+      id: Date.now().toString(),
+      username: req.user.username,
+      text: req.body.text || "",
+      video: req.files.video[0].filename,
+      cover: req.files.cover[0].filename
+    };
+
+    posts.push(newPost);
+    writePosts(posts);
+    res.json(newPost);
+  } catch (err) {
+    console.error("POST /posts xətası:", err);
+    res.status(500).json({ message: "Server xətası baş verdi" });
+  }
 });
+
 
 app.get("/posts", (req, res) => {
   res.json(readPosts());
@@ -343,6 +383,20 @@ app.delete("/posts/:id", auth, (req, res) => {
   fs.unlinkSync(path.join(uploadDir, post.filename));
   writePosts(posts.filter(p => p.id !== req.params.id));
   res.json({ message: "Silindi" });
+});
+
+app.get("/users", (req, res) => {
+  try {
+    const usersPath = path.join(__dirname, "users.json");
+
+    const data = fs.readFileSync(usersPath, "utf-8");
+
+    res.json(JSON.parse(data));
+
+  } catch (error) {
+    console.error("USERS ERROR:", error);
+    res.status(500).json({ message: "Server xətası: İstifadəçi məlumatları tapılmadı." });
+  }
 });
 
 app.listen(PORT, () =>

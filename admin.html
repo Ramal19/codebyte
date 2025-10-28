@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="az">
+
+<head>
+    <meta charset="UTF-8">
+    <title>JSON Fetch Nümunə</title>
+</head>
+
+<body>
+    <h1>İstifadəçilər</h1>
+    <ul id="userList"></ul>
+    <input type="text" name="" id="inp">
+    <button id="btn">Klikle</button>
+    <a href="./backend/users.json">h</a>
+    <script>
+        // fetch ilə JSON faylını oxumaq
+        const inp = document.getElementById("inp")
+        const btn = document.getElementById("btn")
+        fetch('./backend/users.json')
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Şəbəkə xətası: ' + response.status);
+                }
+                return response.json();
+            })
+            .then(data => {
+                const userList = document.getElementById('userList');
+
+                data.forEach(user => {
+                    const li = document.createElement('li');
+                    li.textContent = `Username: ${user.username}, Email: ${user.email}, Role: ${user.role}`;
+                    userList.appendChild(li);
+
+                    // btn.addEventListener("click", () => {
+
+                    // });
+                });
+                btn.addEventListener("click", () => {
+                    data.forEach(user => {
+                        if (inp.value === user.username) { console.log("Istifadeci tapildi"); }
+                        else { localStorage.setItem("Loggg", "Istifadeci") }
+                    })
+                })
+            })
+            .catch(error => {
+                console.error('Xəta baş verdi:', error);
+            });
+    </script>
+</body>
+
+</html>

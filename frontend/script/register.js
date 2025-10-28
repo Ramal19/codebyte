@@ -1,4 +1,4 @@
-const reg = document.getElementById("reg");
+// const reg = document.getElementById("reg");
 
 // reg.onclick = () => { window.location.href = "./login.html" }
 
@@ -24,13 +24,12 @@ form.addEventListener("submit", async (e) => {
             email: data.email
         }));
 
-        window.location.href = "./main.html";
+        window.location.href = "./index.html";
     }
 
 });
 
 // FRONTEND
-
 
 const inputs = document.querySelectorAll(".input");
 const icons = document.querySelectorAll(".icon");
@@ -111,3 +110,30 @@ eyeClose.addEventListener("click", () => {
         }
     })
 })
+
+
+
+inputs.forEach((inp, index) => {
+
+    inp.addEventListener("focus", () => {
+        if (index === 0) {
+            icons.forEach((el, index) => {
+                if (index === 0) {
+                    el.style.cssText = `font-size: 14px; transform: translateY(-25px); transition: all 0.3s ease;`
+                }
+            });
+        } else if (index === 1) {
+            icons.forEach((el, index) => {
+                if (index === 1) {
+                    el.style.cssText = `font-size: 14px; transform: translateY(-25px); transition: all 0.3s ease;`
+                }
+            });
+        } else {
+            icons.forEach((el, index) => {
+                if (index === 2) {
+                    el.style.cssText = `font-size: 14px; transform: translateY(-25px); transition: all 0.3s ease;`
+                }
+            });
+        }
+    })
+});
