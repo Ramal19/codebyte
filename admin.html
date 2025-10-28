@@ -16,7 +16,7 @@
         // fetch ilə JSON faylını oxumaq
         const inp = document.getElementById("inp")
         const btn = document.getElementById("btn")
-        fetch('./backend/users.json')
+        fetch('http://localhost:3000/users')
             .then(response => {
                 if (!response.ok) {
                     throw new Error('Şəbəkə xətası: ' + response.status);

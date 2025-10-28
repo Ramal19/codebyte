@@ -317,6 +317,10 @@ app.get("/profile", auth, (req, res) => {
   res.json({ message: `Xoş gəldin ${req.user.username}!`, role: req.user.role });
 });
 
+app.get("/", (req, res) => {
+  res.sendFile(path.join(__dirname, "../frontend/admin.html"));
+});
+
 // app.post("/posts", auth, upload.single("image"), (req, res) => {
 //   const posts = readPosts();
 //   const newPost = {
