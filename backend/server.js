@@ -381,9 +381,7 @@ app.get("/posts/my-posts", auth, async (req, res) => {
     const userId = req.user.id;
     const snapshot = await postsRef.where('submittedByUserId', '==', userId).get();
 
-    if (snapshot.empty) {
-      return res.json([]);
-    }
+    if (snapshot.empty) return res.json([]);
 
     let myPosts = snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
 
@@ -395,8 +393,8 @@ app.get("/posts/my-posts", auth, async (req, res) => {
 
     res.json(myPosts);
   } catch (error) {
-    console.error("GET /posts/my-posts error:", error);
-    res.status(500).json({ message: "Şəxsi postlar gətirilmədi.", error: error.message });
+    console.error("MY-POSTS ERROR:", error.message);
+    res.status(500).json({ message: "Postlar gətirilmədi.", error: error.message });
   }
 });
 
@@ -832,7 +830,7 @@ app.get("/comments/:postId/:videoIndex", async (req, res) => {
 app.post("/upload-profile-pic", auth, upload.single("profilePic"), async (req, res) => {
   try {
     if (!req.file) {
-      return res.status(400).json({ message: "Şəkil faylı göndərilməyib." });
+      return res.status(400).json({ success: false, message: "Şəkil faylı seçilməyib." });
     }
 
     const userId = req.user.id;
@@ -840,15 +838,16 @@ app.post("/upload-profile-pic", auth, upload.single("profilePic"), async (req, r
     const userDoc = await userDocRef.get();
 
     if (!userDoc.exists) {
-      return res.status(404).json({ message: "İstifadəçi tapılmadı." });
+      return res.status(404).json({ success: false, message: "İstifadəçi tapılmadı." });
     }
 
-    try {
-      if (userDoc.data().profilePic) {
-        await deleteFromFirebase(userDoc.data().profilePic);
+    const oldPicUrl = userDoc.data().profilePic;
+    if (oldPicUrl) {
+      try {
+        await deleteFromFirebase(oldPicUrl);
+      } catch (delErr) {
+        console.warn("⚠️ Köhnə şəkil Firebase-dən silinmədi:", delErr.message);
       }
-    } catch (delErr) {
-      console.warn("Köhnə şəkil silinə bilmədi, davam edilir...");
     }
 
     const imageUrl = await uploadToFirebase(req.file);
@@ -863,9 +862,13 @@ app.post("/upload-profile-pic", auth, upload.single("profilePic"), async (req, r
       message: "Profil şəkli uğurla yeniləndi",
       imageUrl: imageUrl
     });
+
   } catch (error) {
-    console.error("Upload Profile Pic Error:", error);
-    res.status(500).json({ message: "Şəkil yüklənərkən xəta: " + error.message });
+    console.error("❌ Upload Profile Pic Error:", error);
+    res.status(500).json({
+      success: false,
+      message: "Server xətası: " + error.message
+    });
   }
 });
 
