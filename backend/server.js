@@ -121,8 +121,11 @@ async function createNotification(userId, message, courseId) {
 // --- MARŞRUTLAR (ROUTES) ---
 
 // Qeydiyyat
+const tempUsers = {};
+
 app.post("/register", async (req, res) => {
-  const { username, email, password } = req.body;
+  const { username, email, password, checkOnly } = req.body;
+
   if (!username || !email || !password)
     return res.status(400).json({ message: "Boş ola bilməz" });
 
@@ -134,13 +137,34 @@ app.post("/register", async (req, res) => {
     if (users.find((u) => u.email === email))
       return res.status(409).json({ message: "Bu email artıq istifadə olunur" });
 
+    if (checkOnly) {
+      return res.json({ message: "Məlumatlar unikaldır, davam edə bilərsiniz." });
+    }
+
     const hashed = await bcrypt.hash(password, 10);
     const newUserRef = usersRef.doc();
     const initialRole = users.length === 0 ? "admin" : "user";
 
-    await newUserRef.set({ username, email, password: hashed, role: initialRole });
+    await newUserRef.set({
+      username,
+      email,
+      password: hashed,
+      role: initialRole,
+      createdAt: new Date().toISOString()
+    });
 
-    res.json({ message: "Qeydiyyat uğurla tamamlandı" });
+    const token = jwt.sign(
+      { id: newUserRef.id, username, role: initialRole },
+      SECRET,
+      { expiresIn: "30d" }
+    );
+
+    res.json({
+      message: "Qeydiyyat uğurla tamamlandı",
+      token,
+      role: initialRole
+    });
+
   } catch (error) {
     console.error("REGISTER ERROR:", error);
     res.status(500).json({ message: "Server xətası" });
