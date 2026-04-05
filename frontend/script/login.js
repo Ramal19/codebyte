@@ -1,41 +1,66 @@
-const btn = document.getElementById("location")
-// btn.onclick = () => {
-//     window.location.href = "./index.html"
-// }
+const regUser = localStorage.getItem("registeredUser");
+const loginUser = localStorage.getItem("loginUser");
 
-const userInp = document.getElementById("username-inp")
+if (regUser || loginUser) {
+    alert("Siz artıq daxil olmusunuz!");
+    window.location.href = "../index.html";
+}
+
+const API_URL = "https://codebyte-backend-ibyq.onrender.com"
 
 const form = document.getElementById("loginForm");
+
 form.addEventListener("submit", async (e) => {
     e.preventDefault();
+
     const data = {
         username: form.username.value,
         password: form.password.value
     };
-    const res = await fetch("http://localhost:3000/login", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(data)
-    });
-    const json = await res.json();
-    if (res.ok) {
-        localStorage.setItem("token", json.token);
-        localStorage.setItem("loginUser", JSON.stringify({
-            username: data.username,
-            // email: json.email
-        }));
 
-        // document.getElementById("msg").innerText = "Giriş uğurludur!";
-        alert("Giris ugurludur")
-        window.location.href = "../document/index.html"
+    try {
+        const res = await fetch(`${API_URL}/login`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(data)
+        });
 
+        const json = await res.json();
 
-    } else {
-        // document.getElementById("msg").innerText = json.message;
-        alert(json.message)
+        if (res.ok) {
+
+            localStorage.setItem("token", json.token);
+
+            localStorage.setItem("loginUser", JSON.stringify({
+                username: data.username,
+                role: json.role
+            }));
+
+            Swal.fire({
+                title: "Giriş uğurludur!",
+                icon: "success",
+            }).then((result) => {
+                if (result.isConfirmed || result.dismiss === Swal.DismissReason.backdrop) {
+
+                    // if (json.role === "admin") {
+                    // window.location.href = "../admin-dashboard/documents/a1d2m3i4n5P1a2n3e4l5.html";
+                    // } else {
+                    window.location.href = "../index.html";
+                    // }
+                }
+            });
+
+        } else {
+            // Giriş uğursuz olarsa, serverdən gələn xəta mesajını göstər
+            alert(json.message);
+        }
+    } catch (error) {
+        console.error("Giriş prosesində kritik xəta:", error);
+        alert("Server ilə əlaqə qurularkən xəta baş verdi.");
     }
 });
 
+// --- UI İdarəetmə Kodları ---
 
 const inputs = document.querySelectorAll(".input");
 const icons = document.querySelectorAll(".icon");
@@ -49,6 +74,8 @@ inputs.forEach((inp, index) => {
                     el.style.cssText = `font-size: 14px; transform: translateY(-25px); transition: all 0.3s ease;`
                 }
             });
+
+
         } else {
             icons.forEach((el, index) => {
                 if (index === 1) {
